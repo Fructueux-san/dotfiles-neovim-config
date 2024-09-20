@@ -32,7 +32,8 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 keymap.set('n', 'te', ':tabedit ')
 
 keymap.set('n', 'tc', ':tabclose<CR>')
-keymap.set('n', 'tn', ':tabnext<CR>');
+keymap.set('n', 'tn', ':tabnext<CR>')
+keymap.set('n', 'tnn', ':tabnew<CR>')
 keymap.set('n', 'tp', ':tabprevious<CR>');
 keymap.set('n', 'tt', ':tabs<CR>');
 -- Split window

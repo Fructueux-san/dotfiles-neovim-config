@@ -60,31 +60,31 @@ require("lspconfig").lua_ls.setup {
   }
 }
 
-require("lspconfig").solargraph.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").pyright.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").intelephense.setup {
-  capabilities = capabilities,
-}
-
-
-require("lspconfig").cssls.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").tsserver.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").html.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").emmet_language_server.setup {
-  capabilities = capabilities,
-}
+-- require("lspconfig").solargraph.setup {
+--   capabilities = capabilities,
+-- }
+--
+-- require("lspconfig").pyright.setup {
+--   capabilities = capabilities,
+-- }
+--
+-- require("lspconfig").intelephense.setup {
+--   capabilities = capabilities,
+-- }
+--
+--
+-- require("lspconfig").cssls.setup {
+--   capabilities = capabilities,
+-- }
+--
+-- require("lspconfig").tsserver.setup {
+--   capabilities = capabilities,
+-- }
+--
+-- require("lspconfig").html.setup {
+--   capabilities = capabilities,
+-- }
+--
+-- require("lspconfig").emmet_language_server.setup {
+--   capabilities = capabilities,
+-- }

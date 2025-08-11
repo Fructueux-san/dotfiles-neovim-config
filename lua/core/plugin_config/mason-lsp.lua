@@ -64,14 +64,14 @@ require("lspconfig").lua_ls.setup {
 --   capabilities = capabilities,
 -- }
 --
--- require("lspconfig").pyright.setup {
---   capabilities = capabilities,
--- }
+require("lspconfig").pyright.setup {
+  capabilities = capabilities,
+}
 --
--- require("lspconfig").intelephense.setup {
---   capabilities = capabilities,
--- }
---
+require("lspconfig").intelephense.setup {
+  capabilities = capabilities,
+}
+
 --
 -- require("lspconfig").cssls.setup {
 --   capabilities = capabilities,
@@ -85,6 +85,6 @@ require("lspconfig").lua_ls.setup {
 --   capabilities = capabilities,
 -- }
 --
--- require("lspconfig").emmet_language_server.setup {
---   capabilities = capabilities,
--- }
+require("lspconfig").emmet_language_server.setup {
+  capabilities = capabilities,
+}

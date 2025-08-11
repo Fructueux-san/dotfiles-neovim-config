@@ -10,7 +10,7 @@ vim.opt.autoread = true
 vim.opt.cursorline = true
 
 -- use spaces for tabs and whatnot
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
@@ -33,7 +33,7 @@ keymap.set('n', 'te', ':tabedit ')
 
 keymap.set('n', 'tc', ':tabclose<CR>')
 keymap.set('n', 'tn', ':tabnext<CR>')
-keymap.set('n', 'tnn', ':tabnew<CR>')
+keymap.set('n', 'to', ':tabnew<CR>')
 keymap.set('n', 'tp', ':tabprevious<CR>');
 keymap.set('n', 'tt', ':tabs<CR>');
 -- Split window
@@ -41,10 +41,10 @@ keymap.set('n', 'ss', ':split<Return><C-w>w')
 keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 -- Move window
 keymap.set('n', '<Space>', '<C-w>w')
-keymap.set('', 'sh', '<C-w>h')
-keymap.set('', 'sk', '<C-w>k')
-keymap.set('', 'sj', '<C-w>j')
-keymap.set('', 'sl', '<C-w>l')
+keymap.set('n', 'sh', '<C-w>h')
+keymap.set('n', 'sk', '<C-w>k')
+keymap.set('n', 'sj', '<C-w>j')
+keymap.set('n', 'sl', '<C-w>l')
 
 -- Resize window
 keymap.set('n', '<C-w><left>', '<C-w><')

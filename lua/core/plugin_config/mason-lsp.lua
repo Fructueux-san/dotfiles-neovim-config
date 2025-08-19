@@ -1,9 +1,9 @@
--- local status, masonlsp = pcall(require, "mason-lspconfig")
---
--- if not status then
---     return
--- end
---
+local status, masonlsp = pcall(require, "mason-lspconfig")
+
+if not status then
+    return
+end
+
 -- masonlsp.setup({
 --     automatic_installation = true,
 --     ensure_installed = {
@@ -32,7 +32,7 @@ require('lspsaga').setup({
   },
 })
 local diagnostic = require("lspsaga.diagnostic")
-local opts = {noremap=true, silent=true}
+local opts = {noremap=true, silent=false}
 vim.keymap.set("n", "gd", "<Cmd>Lspsaga goto_definition<CR>", opts)
 vim.keymap.set("n", "gf", "<Cmd>Lspsaga finder<CR>", opts)
 vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<cr>', opts)
@@ -41,6 +41,12 @@ vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
 vim.keymap.set('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 vim.keymap.set('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
 vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
+vim.keymap.set('n', 'gl', '<Cmd>Lspsaga show_line_diagnostics<CR>')
+vim.keymap.set('n', 'gb', '<Cmd>Lspsaga show_buffer_diagnostics<CR>')
+vim.keymap.set('n', 'gw', '<Cmd>Lspsaga show_workspace_diagnostics<CR>')
+vim.keymap.set('n', 'gc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>')
+vim.keymap.set('n', 'go', '<Cmd>Lspsaga outline<CR>')
+vim.keymap.set('n', 'gt', '<Cmd>Lspsaga term_toggle<CR>')
 
 
 require("lspconfig").lua_ls.setup {
@@ -72,19 +78,19 @@ require("lspconfig").intelephense.setup {
   capabilities = capabilities,
 }
 
---
--- require("lspconfig").cssls.setup {
---   capabilities = capabilities,
--- }
+
+require("lspconfig").cssls.setup {
+  capabilities = capabilities,
+}
 --
 -- require("lspconfig").tsserver.setup {
 --   capabilities = capabilities,
 -- }
 --
--- require("lspconfig").html.setup {
---   capabilities = capabilities,
--- }
---
+require("lspconfig").html.setup {
+  capabilities = capabilities,
+}
+
 require("lspconfig").emmet_language_server.setup {
   capabilities = capabilities,
 }

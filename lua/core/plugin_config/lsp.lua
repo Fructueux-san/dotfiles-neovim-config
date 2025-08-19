@@ -37,6 +37,20 @@ nvim_lsp.intelephense.setup({
   capabilities = capabilities
 })
 
+nvim_lsp.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+
+nvim_lsp.jedi_language_server.setup({
+  on_attach = on_attach,
+  capabilities = capabilities
+})
+
+nvim_lsp.clangd.setup({
+  -- on_attach = on_attach,
+  -- capabilities = capabilities
+})
 -- Tailwind
 -- nvim_lsp.tailwindcss.setup({
 --     on_attach = on_attach,

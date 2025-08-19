@@ -86,13 +86,13 @@ return require('packer').startup(function(use)
             })
         end,
   }
-  --
-  -- use({
-  --         "williamboman/mason.nvim",
-  --         config = function()
-  --             require("mason").setup()
-  --         end,
-  -- })
+
+  use({
+          "williamboman/mason.nvim",
+          config = function()
+              require("mason").setup()
+          end,
+  })
 
   use {
     "windwp/nvim-autopairs",

@@ -47,6 +47,7 @@ vim.keymap.set('n', 'gw', '<Cmd>Lspsaga show_workspace_diagnostics<CR>')
 vim.keymap.set('n', 'gc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>')
 vim.keymap.set('n', 'go', '<Cmd>Lspsaga outline<CR>')
 vim.keymap.set('n', 'gt', '<Cmd>Lspsaga term_toggle<CR>')
+vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>')
 
 
 require("lspconfig").lua_ls.setup {

@@ -1,97 +1,77 @@
 local status, masonlsp = pcall(require, "mason-lspconfig")
+if not status then return end
 
-if not status then
-    return
+-- 1. Configuration de Mason-LSPConfig
+masonlsp.setup({
+    -- On automatise l'installation des serveurs que tu appelles plus bas
+    ensure_installed = {
+        "lua_ls",
+        "pyright",
+        "intelephense",
+        "cssls",
+        "html",
+        "emmet_language_server",
+        "ts_ls", -- Remplace tsserver
+    },
+    automatic_installation = true,
+})
+
+-- 2. Capabilities pour nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- 3. Configuration de Lspsaga (Version moderne)
+require('lspsaga').setup({
+    ui = {
+        code_action_icon = "💡",
+    },
+    symbol_in_winbar = {
+        enable = true,
+        separator = '  ',
+    },
+})
+
+-- 4. Keymaps (Nettoyés)
+local opts = { noremap = true, silent = true }
+local key = vim.keymap.set
+
+key("n", "gd", "<Cmd>Lspsaga goto_definition<CR>", opts)
+key("n", "gf", "<Cmd>Lspsaga lsp_finder<CR>", opts) -- Renommé en lsp_finder dans les versions récentes
+key("n", "K", "<Cmd>Lspsaga hover_doc<cr>", opts)
+key({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+key("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+key('i', '<C-k>', vim.lsp.buf.signature_help, opts)
+key('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
+key('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
+key('n', 'gl', '<Cmd>Lspsaga show_line_diagnostics<CR>', opts)
+key('n', 'go', '<Cmd>Lspsaga outline<CR>', opts)
+
+-- 5. Configuration des serveurs via lspconfig
+-- local lspconfig = require("lspconfig")
+
+-- Liste des serveurs simples (sans config spécifique)
+local servers = { "pyright", "intelephense", "cssls", "html", "emmet_language_server", "ts_ls" }
+
+for _, lsp in ipairs(servers) do
+    vim.lsp.config(lsp, {
+        capabilities = capabilities
+    })
+    -- lspconfig[lsp].setup {
+    --     capabilities = capabilities,
+    -- }
 end
 
--- masonlsp.setup({
---     automatic_installation = true,
---     ensure_installed = {
---         "cssls",
---         "eslint",
---         "html",
---         "jsonls",
---         "tsserver",
---         "pyright",
---         "tailwindcss",
---     },
--- })
-
-require("mason-lspconfig").setup()
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-require('lspsaga').setup({
-  code_action_icon = "💡",
-  symbol_in_winbar = {
-    in_custom = false,
-    enable = true,
-    separator = ' ',
-    show_file = true,
-    file_formatter = ""
-  },
-})
-local diagnostic = require("lspsaga.diagnostic")
-local opts = {noremap=true, silent=false}
-vim.keymap.set("n", "gd", "<Cmd>Lspsaga goto_definition<CR>", opts)
-vim.keymap.set("n", "gf", "<Cmd>Lspsaga finder<CR>", opts)
-vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<cr>', opts)
-vim.keymap.set({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
-vim.keymap.set('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-vim.keymap.set('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
-vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
-vim.keymap.set('n', 'gl', '<Cmd>Lspsaga show_line_diagnostics<CR>')
-vim.keymap.set('n', 'gb', '<Cmd>Lspsaga show_buffer_diagnostics<CR>')
-vim.keymap.set('n', 'gw', '<Cmd>Lspsaga show_workspace_diagnostics<CR>')
-vim.keymap.set('n', 'gc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>')
-vim.keymap.set('n', 'go', '<Cmd>Lspsaga outline<CR>')
-vim.keymap.set('n', 'gt', '<Cmd>Lspsaga term_toggle<CR>')
-vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>')
-
-
-require("lspconfig").lua_ls.setup {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.stdpath "config" .. "/lua"] = true,
+-- Configuration spécifique pour Lua
+vim.lsp.config('lua_ls', {
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
         },
-      },
     },
-  }
-}
+})
 
--- require("lspconfig").solargraph.setup {
---   capabilities = capabilities,
--- }
---
-require("lspconfig").pyright.setup {
-  capabilities = capabilities,
-}
---
-require("lspconfig").intelephense.setup {
-  capabilities = capabilities,
-}
-
-
-require("lspconfig").cssls.setup {
-  capabilities = capabilities,
-}
---
--- require("lspconfig").tsserver.setup {
---   capabilities = capabilities,
--- }
---
-require("lspconfig").html.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").emmet_language_server.setup {
-  capabilities = capabilities,
-}
+vim.lsp.enable('lua_ls')

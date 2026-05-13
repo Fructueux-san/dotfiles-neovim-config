@@ -44,6 +44,7 @@ key('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
 key('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
 key('n', 'gl', '<Cmd>Lspsaga show_line_diagnostics<CR>', opts)
 key('n', 'go', '<Cmd>Lspsaga outline<CR>', opts)
+key('n', 'gt', '<Cmd>Lspsaga term_toggle<CR>', opts)
 
 -- 5. Configuration des serveurs via lspconfig
 -- local lspconfig = require("lspconfig")
